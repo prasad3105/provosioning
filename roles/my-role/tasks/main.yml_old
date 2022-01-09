@@ -1,0 +1,10 @@
+- ec2:
+    key_name: cloudformation_devops
+    instance_type: t2.micro
+    image: ami-03af6a70ccd8cb578
+    region: us-west-1
+    wait: yes
+    count: 1
+    vpc_subnet_id: subnet-05b065a9dcd8ea9ad
+    assign_public_ip: yes
+

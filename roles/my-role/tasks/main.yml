@@ -1,0 +1,33 @@
+- name :  read env variable files
+  include_vars :
+    file : "vars/{{ PROJECT }}_{{ ENV }}.yml"
+
+- name :  read project variable files
+  include_vars :
+    file : "vars/{{ PROJECT }}.yml"
+   
+    #- ec2:
+    #    key_name: cloudformation_devops
+    #    instance_type: t2.micro
+    #    image: ami-03af6a70ccd8cb578
+    #    region: us-west-1
+    #    wait: yes
+    #    count: 1
+    #    vpc_subnet_id: subnet-05b065a9dcd8ea9ad
+    #    assign_public_ip: yes
+
+- ec2 : 
+    region : "{{ REGION }}"
+    key_name : "{{ KEYNAME }}"
+    instance_type : t2.micro
+    image : "{{ AMI }}"
+    wait : yes
+    count : "{{ COUNT }}"
+    vpc_subnet_id : yes
+    group :
+      - "{{ SGNAME }}"
+    instance_tags :
+      Name : "Webserver"
+      Project : "{{ PROJECT }}"
+      ENV : "{{ ENV }}"  
+      ManagedBy : "Ansible"
